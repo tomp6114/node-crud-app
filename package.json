@@ -11,5 +11,9 @@
     "url": "https://github.com/tomp6114/node-crud-app.git"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.21.0",
+    "mongoose": "^8.7.0"
+  }
 }
