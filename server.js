@@ -26,44 +26,44 @@ mongoose
     useUnifiedTopology: true
   })
   .then(() => console.log('Connected to MongoDB'))
-  .catch((err) => console.error('Could not connect to MongoDB...', err));
+  .catch((err) => console.error('Could not connect to MongoDB...', err),);
 
-  // POST: Create a new book
+// POST: Create a new book
 app.post('/books', async (req, res) => {
-    const { title, author, pages } = req.body;
-  
-    try {
-      const book = new Book({ title, author, pages });
-      await book.save();
-      res.status(201).send(book);
-    } catch (error) {
-      res.status(400).send({ message: error.message });
-    }
-  });
+  const { title, author, pages } = req.body;
 
-  // GET: Retrieve all books
+  try {
+    const book = new Book({ title, author, pages });
+    await book.save();
+    res.status(201).send(book);
+  } catch (error) {
+    res.status(400).send({ message: error.message });
+  }
+});
+
+// GET: Retrieve all books
 app.get('/books', async (req, res) => {
-    try {
-      const books = await Book.find();
-      res.status(200).json(books);
-    } catch (error) {
-      res.status(500).send({ message: error.message });
-    }
-  });
-  
-  // GET: Retrieve a book by ID
-  app.get('/books/:id', async (req, res) => {
-    const { id } = req.params;
-    try {
-      const book = await Book.findById(id);
-      if (!book) return res.status(404).send('Book not found');
-      res.status(200).json(book);
-    } catch (error) {
-      res.status(500).send({ message: error.message });
-    }
-  });
+  try {
+    const books = await Book.find();
+    res.status(200).json(books);
+  } catch (error) {
+    res.status(500).send({ message: error.message });
+  }
+});
 
-  // PUT: Update a book by ID
+// GET: Retrieve a book by ID
+app.get('/books/:id', async (req, res) => {
+  const { id } = req.params;
+  try {
+    const book = await Book.findById(id);
+    if (!book) return res.status(404).send('Book not found');
+    res.status(200).json(book);
+  } catch (error) {
+    res.status(500).send({ message: error.message });
+  }
+});
+
+// PUT: Update a book by ID
 app.put('/books/:id', async (req, res) => {
   const { id } = req.params;
   const { title, author, pages } = req.body;
@@ -82,15 +82,14 @@ app.put('/books/:id', async (req, res) => {
 });
 // DELETE: Remove a book by ID
 app.delete('/books/:id', async (req, res) => {
-    const { id } = req.params;
-  
-    try {
-      const deletedBook = await Book.findByIdAndDelete(id);
-      if (!deletedBook) return res.status(404).send('Book not found');
-      res.status(200).json({ message: 'Book deleted' });
-    } catch (error) {
-      res.status(500).send({ message: error.message });
-    }
-  });
-  
-  
+  const { id } = req.params;
+
+  try {
+    const deletedBook = await Book.findByIdAndDelete(id);
+    if (!deletedBook) return res.status(404).send('Book not found');
+    res.status(200).json({ message: 'Book deleted' });
+  } catch (error) {
+    res.status(500).send({ message: error.message });
+  }
+});
+
