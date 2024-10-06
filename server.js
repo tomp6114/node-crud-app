@@ -10,9 +10,9 @@ const Book = require('./models/book');
 app.use(express.json()); // Parses incoming JSON requests
 
 // Routes
-app.get('/', (req, res) => {
-  res.send('Happy Birthday Ooleshwariii....');
-});
+// app.get('/', (req, res) => {
+//   res.send('Welcome to node js....');
+// });s
 
 // Start the server
 app.listen(PORT, () => {
@@ -26,7 +26,7 @@ mongoose
     useUnifiedTopology: true
   })
   .then(() => console.log('Connected to MongoDB'))
-  .catch((err) => console.error('Could not connect to MongoDB...', err),);
+  .catch((err) => console.error('Could not connect to MongoDB...', err) );
 
 // POST: Create a new book
 app.post('/books', async (req, res) => {
